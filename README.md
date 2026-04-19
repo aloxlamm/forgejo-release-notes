@@ -22,48 +22,52 @@ jobs:
         uses: aloxlamm/forgejo-release-notes@v1
         with:
           forgejo-url: 'https://git.example.com'
-          forgejo-owner: 'my-org'      # Organization name
+          forgejo-owner: 'my-org'      # Organization name or user name
           forgejo-repository: 'my-project'
           forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
           release-tag: ${{ github.ref_name }}
       
-      - name: Create Deployment Notification
+      - name: Display Results
         run: |
-          echo "Deploying ${{ steps.release.outputs.title }}"
-          echo "Released: ${{ steps.release.outputs.published_at }}"
-          echo "Author: ${{ steps.release.outputs.author_full_name }}"
-          echo "Release URL: ${{ steps.release.outputs.url }}"
-```
+          echo "=== Core Release Information ==="
+          echo "Title: ${{ steps.test-action.outputs.title }}"
+          echo "Body: ${{ steps.test-action.outputs.body }}"
+          echo "ID: ${{ steps.test-action.outputs.id }}"
+          echo "Tag Name: ${{ steps.test-action.outputs.tag_name }}"
+          echo "Target Commitish: ${{ steps.test-action.outputs.target_commitish }}"
+          echo "URL: ${{ steps.test-action.outputs.url }}"
+          echo ""
+          echo "=== API URLs ==="
+          echo "API URL: ${{ steps.test-action.outputs.api_url }}"
+          echo "Upload URL: ${{ steps.test-action.outputs.upload_url }}"
+          echo "Tarball URL: ${{ steps.test-action.outputs.tarball_url }}"
+          echo "Zipball URL: ${{ steps.test-action.outputs.zipball_url }}"
+          echo ""
+          echo "=== Author Information ==="
+          echo "Author: ${{ steps.test-action.outputs.author }}"
+          echo "Author ID: ${{ steps.test-action.outputs.author_id }}"
+          echo "Author Email: ${{ steps.test-action.outputs.author_email }}"
+          echo "Author Full Name: ${{ steps.test-action.outputs.author_full_name }}"
+          echo "Author Avatar URL: ${{ steps.test-action.outputs.author_avatar_url }}"
+          echo "Author HTML URL: ${{ steps.test-action.outputs.author_html_url }}"
+          echo ""
+          echo "=== Timestamps ==="
+          echo "Created At: ${{ steps.test-action.outputs.created_at }}"
+          echo "Published At: ${{ steps.test-action.outputs.published_at }}"
+          echo ""
+          echo "=== Release Properties ==="
+          echo "Draft: ${{ steps.test-action.outputs.draft }}"
+          echo "Prerelease: ${{ steps.test-action.outputs.prerelease }}"
+          echo "Hide Archive Links: ${{ steps.test-action.outputs.hide_archive_links }}"
+          echo ""
+          echo "=== Assets & Downloads ==="
+          echo "Assets Count: ${{ steps.test-action.outputs.assets_count }}"
+          echo "Zip Download Count: ${{ steps.test-action.outputs.zip_download_count }}"
+          echo "Tarball Download Count: ${{ steps.test-action.outputs.tarball_download_count }}"
+          echo ""
+          echo "=== Complete JSON Response ==="
+          echo '${{ steps.test-action.outputs.json }}'
 
-### Example with User Repository
-
-```yaml
-name: Get User Release
-on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Release tag to fetch'
-        required: true
-
-jobs:
-  fetch-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Release Notes
-        id: release
-        uses: aloxlamm/forgejo-release-notes@v1
-        with:
-          forgejo-url: 'https://git.example.com'
-          forgejo-owner: 'john-doe'    # Username (not organization)
-          forgejo-repository: 'awesome-project'
-          forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
-          release-tag: ${{ github.event.inputs.tag }}
-      
-      - name: Display Release Info
-        run: |
-          echo "Release: ${{ steps.release.outputs.title }}"
-          echo "Author: ${{ steps.release.outputs.author }}"
 ```
 
 ## Inputs
