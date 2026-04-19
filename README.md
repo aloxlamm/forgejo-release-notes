@@ -1,4 +1,4 @@
-# Get Release Notes Action
+# Forgejo Release Notes Action
 
 A GitHub Action that fetches comprehensive release information from a Forgejo git repository via its API. This action retrieves detailed release notes, metadata, and author information for a specified tag/release.
 
