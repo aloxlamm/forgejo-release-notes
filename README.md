@@ -142,7 +142,7 @@ uses: https://github.com/aloxlamm/forgejo-release-notes@v1
 
 ## Local Development
 
-### Testing Locally
+### Test with npm
 
 For local testing and development, you can create a `.env` file with your configuration:
 
@@ -165,30 +165,27 @@ GITHUB_OUTPUT="./output.txt"
 EOF
 ```
 
-To test the action locally:
-
+Then run the utility script
 ```bash
-# Load environment variables
-source .env
-
-# Run the action
-node index.js
-
-# Check the output
-cat output.txt
-```
-
-### Quick Test Commands
-
-```bash
-# Quick test with npm
 npm test
-
-# Custom local test
-npm run test:local
 ```
 
 > **Note**: Make sure to add `.env` to your `.gitignore` file to avoid committing sensitive tokens.
+
+
+### 2. **Manual Environment Test**
+
+```bash
+export INPUT_FORGEJO_URL="https://git.dmz.thomassauter.com"
+export INPUT_FORGEJO_OWNER="thstr"
+export INPUT_FORGEJO_REPOSITORY="your-repo"
+export INPUT_RELEASE_TAG="v1.0.0"
+export INPUT_FORGEJO_TOKEN="your-token"
+export GITHUB_OUTPUT="./output.txt"
+
+node index.js
+cat output.txt  # Check outputs
+```
 
 ## License
 
