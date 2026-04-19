@@ -1,0 +1,37 @@
+name: Check Built Action
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-dist:
+    runs-on: ubuntu-latest
+    name: Check dist/ is up-to-date
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build action
+        run: npm run build
+
+      - name: Check for uncommitted changes
+        run: |
+          if [ -n "$(git status --porcelain dist/)" ]; then
+            echo "::error::Built files are out of date. Run 'npm run build' locally and commit the changes."
+            git diff dist/
+            exit 1
+          else
+            echo "✅ Built files are up-to-date"
+          fi

@@ -5,8 +5,7 @@ node_modules/
 .env.local
 .env.*.local
 test-output.txt
-.env
-
 response.json
 
-.github/workflows/test.yml
+# Note: dist/ folder is intentionally NOT ignored
+# It contains the bundled GitHub Action and must be committed
