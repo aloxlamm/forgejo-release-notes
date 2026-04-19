@@ -6,7 +6,6 @@
   "scripts": {
     "build": "ncc build index.js -o dist",
     "test": "node test.js",
-    "test:local": "node index.js",
     "format": "npx prettier --write ."
   },
   "dependencies": {},

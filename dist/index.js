@@ -27658,6 +27658,9 @@ async function run() {
     core.setOutput("zip_download_count", zipDownloadCount.toString());
     core.setOutput("tarball_download_count", tarballDownloadCount.toString());
 
+    core.info(
+      `✅ Successfully fetched and parsed release notes for '${title}'`,
+    );
     // Create collapsible section for detailed output
     core.startGroup("Response JSON");
     core.info(JSON.stringify(release));
@@ -27690,8 +27693,6 @@ async function run() {
     core.info(`Body:`);
     core.info(body.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n"));
     core.endGroup();
-
-    core.info(`✅ Successfully fetched release notes for '${title}'`);
   } catch (error) {
     core.setFailed(` ❌ Failed to fetch release notes:\n${error.message}`);
   }
