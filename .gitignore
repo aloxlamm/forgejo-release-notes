@@ -7,5 +7,11 @@ node_modules/
 test-output.txt
 response.json
 
+# Test Coverage
+coverage/
+
+# Jest cache
+.jest/
+
 # Note: dist/ folder is intentionally NOT ignored
 # It contains the bundled GitHub Action and must be committed

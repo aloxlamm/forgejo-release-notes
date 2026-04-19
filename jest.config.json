@@ -1,0 +1,11 @@
+{
+  "testEnvironment": "node",
+  "clearMocks": true,
+  "resetMocks": true,
+  "restoreMocks": true,
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coverageReporters": ["text", "lcov", "html"],
+  "testMatch": ["**/__tests__/**/*.test.js"],
+  "verbose": true
+}
