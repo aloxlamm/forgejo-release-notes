@@ -1,0 +1,72 @@
+name: "Get Release Notes"
+description: "Fetch release notes for a specified tag/release of a forgejo application."
+inputs:
+  forgejo-url:
+    description: "The URL of the Forgejo instance"
+    default: "https://git.dmz.thomassauter.com"
+  forgejo-organization:
+    description: "The organization in Forgejo where the repository is located"
+    default: "thstr"
+  forgejo-repository:
+    description: "The repository in Forgejo where the application is located"
+    required: true
+  forgejo-token:
+    description: "A personal access token for authenticating with the Forgejo API"
+    required: true
+  release-tag:
+    description: "The tag or release for which to fetch the release notes."
+    required: true
+outputs:
+  json:
+    description: "Complete JSON response from the Forgejo API"
+  body:
+    description: "Release notes body/description"
+  title:
+    description: "Release title/name"
+  url:
+    description: "HTML URL to the release page"
+  id:
+    description: "Release ID number"
+  tag_name:
+    description: "Git tag name"
+  target_commitish:
+    description: "Target branch or commit"
+  api_url:
+    description: "API URL for the release"
+  upload_url:
+    description: "URL for uploading release assets"
+  author:
+    description: "Release author username"
+  author_email:
+    description: "Release author email address"
+  author_id:
+    description: "Release author ID number"
+  author_full_name:
+    description: "Release author full name"
+  author_avatar_url:
+    description: "Release author avatar image URL"
+  author_html_url:
+    description: "Release author profile URL"
+  created_at:
+    description: "Release creation date (ISO 8601)"
+  published_at:
+    description: "Release publication date (ISO 8601)"
+  draft:
+    description: "Whether the release is a draft (true/false)"
+  prerelease:
+    description: "Whether the release is a prerelease (true/false)"
+  hide_archive_links:
+    description: "Whether archive download links are hidden (true/false)"
+  tarball_url:
+    description: "URL to download release as tar.gz"
+  zipball_url:
+    description: "URL to download release as zip"
+  assets_count:
+    description: "Number of attached release assets"
+  zip_download_count:
+    description: "Number of zip archive downloads"
+  tarball_download_count:
+    description: "Number of tarball archive downloads"
+runs:
+  using: "node22"
+  main: "index.js"

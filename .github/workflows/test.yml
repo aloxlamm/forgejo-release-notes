@@ -1,0 +1,33 @@
+name: Test Get Release Notes Action
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test Action
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Test Get Release Notes
+        uses: ./get-release-notes # Path to your action
+        id: test-action
+        with:
+          forgejo-url: "https://git.dmz.thomassauter.com"
+          forgejo-organization: "thstr"
+          forgejo-repository: "your-test-repo"
+          release-tag: "v1.0.0"
+          forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
+
+      - name: Display Results
+        run: |
+          echo "Title: ${{ steps.test-action.outputs.title }}"
+          echo "URL: ${{ steps.test-action.outputs.url }}"
+          echo "Body: ${{ steps.test-action.outputs.body }}"
+          echo "JSON: ${{ steps.test-action.outputs.json }}"
