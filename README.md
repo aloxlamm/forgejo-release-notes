@@ -11,7 +11,7 @@ name: Deploy Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   deploy:
@@ -21,12 +21,12 @@ jobs:
         id: release
         uses: aloxlamm/forgejo-release-notes@v1
         with:
-          forgejo-url: 'https://git.example.com'
-          forgejo-owner: 'my-org'      # Organization name or user name
-          forgejo-repository: 'my-project'
+          forgejo-url: "https://git.example.com"
+          forgejo-owner: "my-org" # Organization name or user name
+          forgejo-repository: "my-project"
           forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
           release-tag: ${{ github.ref_name }}
-      
+
       - name: Display Results
         run: |
           echo "=== Core Release Information ==="
@@ -67,22 +67,23 @@ jobs:
           echo ""
           echo "=== Complete JSON Response ==="
           echo '${{ steps.test-action.outputs.json }}'
-
 ```
+
 > **NOTE**: when runnign the action on forgejo you need to use the full qualified url for the action:
+
 ```yaml
 uses: https://github.com/aloxlamm/forgejo-release-notes@v1
 ```
 
 ## Inputs
 
-| Input | Description | Required | Default |
-|-------|-------------|----------|---------|
-| `forgejo-url` | The URL of the Forgejo instance | No | `https://git.dmz.thomassauter.com` |
-| `forgejo-owner` | The owner (organization or username) that owns the repository | No | `thstr` |
-| `forgejo-repository` | The repository in Forgejo where the application is located | **Yes** | - |
-| `forgejo-token` | A personal access token for authenticating with the Forgejo API | **Yes** | - |
-| `release-tag` | The tag or release for which to fetch the release notes | **Yes** | - |
+| Input                | Description                                                     | Required |
+| -------------------- | --------------------------------------------------------------- | -------- |
+| `forgejo-url`        | The URL of the Forgejo instance                                 | ✅       |
+| `forgejo-owner`      | The owner (organization or username) that owns the repository   | ✅       |
+| `forgejo-repository` | The repository in Forgejo where the application is located      | ✅       |
+| `forgejo-token`      | A personal access token for authenticating with the Forgejo API | ✅       |
+| `release-tag`        | The tag or release for which to fetch the release notes         | ✅       |
 
 ### Setting up Forgejo Token
 
@@ -94,45 +95,49 @@ uses: https://github.com/aloxlamm/forgejo-release-notes@v1
 ## Outputs
 
 ### Core Release Information
-| Output | Description |
-|--------|-------------|
-| `json` | Complete JSON response from the Forgejo API |
-| `body` | Release notes body/description |
-| `title` | Release title/name |
-| `url` | HTML URL to the release page |
-| `id` | Release ID number |
-| `tag_name` | Git tag name |
-| `target_commitish` | Target branch or commit |
+
+| Output             | Description                                 |
+| ------------------ | ------------------------------------------- |
+| `json`             | Complete JSON response from the Forgejo API |
+| `body`             | Release notes body/description              |
+| `title`            | Release title/name                          |
+| `url`              | HTML URL to the release page                |
+| `id`               | Release ID number                           |
+| `tag_name`         | Git tag name                                |
+| `target_commitish` | Target branch                               |
 
 ### API and Download URLs
-| Output | Description |
-|--------|-------------|
-| `api_url` | API URL for the release |
-| `upload_url` | URL for uploading release assets |
+
+| Output        | Description                       |
+| ------------- | --------------------------------- |
+| `api_url`     | API URL for the release           |
+| `upload_url`  | URL for uploading release assets  |
 | `tarball_url` | URL to download source as tarball |
-| `zipball_url` | URL to download source as zip |
+| `zipball_url` | URL to download source as zip     |
 
 ### Author Information
-| Output | Description |
-|--------|-------------|
-| `author` | Release author username |
-| `author_email` | Release author email address |
-| `author_id` | Release author ID number |
-| `author_full_name` | Release author full name |
+
+| Output              | Description                     |
+| ------------------- | ------------------------------- |
+| `author`            | Release author username         |
+| `author_email`      | Release author email address    |
+| `author_id`         | Release author ID number        |
+| `author_full_name`  | Release author full name        |
 | `author_avatar_url` | Release author avatar image URL |
-| `author_html_url` | Release author profile URL |
+| `author_html_url`   | Release author profile URL      |
 
 ### Metadata and Statistics
-| Output | Description |
-|--------|-------------|
-| `created_at` | Release creation timestamp |
-| `published_at` | Release publication timestamp |
-| `draft` | Whether the release is a draft (`true`/`false`) |
-| `prerelease` | Whether the release is a prerelease (`true`/`false`) |
-| `hide_archive_links` | Whether archive links are hidden (`true`/`false`) |
-| `assets_count` | Number of release assets |
-| `zip_download_count` | Number of zip downloads |
-| `tarball_download_count` | Number of tarball downloads |
+
+| Output                   | Description                                          |
+| ------------------------ | ---------------------------------------------------- |
+| `created_at`             | Release creation timestamp                           |
+| `published_at`           | Release publication timestamp                        |
+| `draft`                  | Whether the release is a draft (`true`/`false`)      |
+| `prerelease`             | Whether the release is a prerelease (`true`/`false`) |
+| `hide_archive_links`     | Whether archive links are hidden (`true`/`false`)    |
+| `assets_count`           | Number of release assets                             |
+| `zip_download_count`     | Number of zip downloads                              |
+| `tarball_download_count` | Number of tarball downloads                          |
 
 ## Requirements
 
@@ -166,12 +171,12 @@ EOF
 ```
 
 Then run the utility script
+
 ```bash
 npm test
 ```
 
 > **Note**: Make sure to add `.env` to your `.gitignore` file to avoid committing sensitive tokens.
-
 
 ### 2. **Manual Environment Test**
 
