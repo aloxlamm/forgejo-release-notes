@@ -33,13 +33,13 @@ jobs:
   integration-test:
     runs-on: ubuntu-latest
     name: Integration Test
-    needs: unit-test  # Run after unit tests pass
+    needs: unit-test
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Test Get Release Notes
-        uses: ./ # Path to your action
+      - name: Test Fetch and Parse Release Notes
+        uses: ./ 
         id: test-action
         with:
           forgejo-url: "https://git.dmz.thomassauter.com"

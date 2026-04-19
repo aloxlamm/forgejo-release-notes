@@ -166,11 +166,18 @@ uses: https://github.com/aloxlamm/forgejo-release-notes@v1
 - Personal access token with repository read permissions
 - Valid repository and tag/release
 
-## Local Development
+## Testing
 
-### Test with npm
+### 1. Unit testing
 
-For local testing and development, you can create a `.env` file with your configuration:
+For unit testing run
+```bash
+npm run test
+```
+
+### 2. Integration testing
+
+For integration testing, you can create a `.env` file with your configuration:
 
 ```bash
 # Create a new .env file
@@ -194,12 +201,12 @@ EOF
 Then run the utility script
 
 ```bash
-npm test
+npm test:e2e
 ```
 
 > **Note**: Make sure to add `.env` to your `.gitignore` file to avoid committing sensitive tokens.
 
-### 2. **Manual Environment Test**
+### 3. **Manual Environment Test**
 
 ```bash
 export INPUT_FORGEJO_URL="https://git.your-forgejo-repo.com"
