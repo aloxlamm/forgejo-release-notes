@@ -83,7 +83,7 @@ uses: https://github.com/aloxlamm/forgejo-release-notes@v1
 | `forgejo-owner`      | The owner (organization or username) that owns the repository   | ✅       |
 | `forgejo-repository` | The repository in Forgejo where the application is located      | ✅       |
 | `forgejo-token`      | A personal access token for authenticating with the Forgejo API | ✅       |
-| `release-tag`        | The tag or release for which to fetch the release notes         | ✅       |
+| `release-tag`        | The tag for which to fetch the release notes                    | ✅       |
 
 ### Setting up Forgejo Token
 
