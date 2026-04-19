@@ -125,15 +125,6 @@ jobs:
 | `zip_download_count` | Number of zip downloads |
 | `tarball_download_count` | Number of tarball downloads |
 
-## Error Handling
-
-The action provides detailed error messages for common issues:
-
-- **Invalid credentials**: Check your `forgejo-token`
-- **Repository not found**: Verify `forgejo-organization` and `forgejo-repository`
-- **Tag not found**: Ensure the `release-tag` exists in the repository
-- **Network issues**: Check `forgejo-url` and network connectivity
-
 ## Requirements
 
 - Forgejo instance with API access
