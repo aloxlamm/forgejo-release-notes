@@ -4,37 +4,7 @@ A GitHub Action that fetches comprehensive release information from a Forgejo gi
 
 ## Usage
 
-### Basic Example
-
-```yaml
-name: Get Release Notes
-on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Release tag to fetch'
-        required: true
-
-jobs:
-  fetch-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Release Notes
-        id: release
-        uses: your-org/forgejo-release-notes@v1
-        with:
-          forgejo-repository: 'my-awesome-app'
-          forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
-          release-tag: ${{ github.event.inputs.tag }}
-      
-      - name: Display Release Info
-        run: |
-          echo "Release Title: ${{ steps.release.outputs.title }}"
-          echo "Release Notes:"
-          echo "${{ steps.release.outputs.body }}"
-```
-
-### Advanced Example with Custom Forgejo Instance
+### Example with Organization Repository
 
 ```yaml
 name: Deploy Release
@@ -49,10 +19,10 @@ jobs:
     steps:
       - name: Get Release Notes
         id: release
-        uses: your-org/forgejo-release-notes@v1
+        uses: aloxlamm/forgejo-release-notes@v1
         with:
           forgejo-url: 'https://git.example.com'
-          forgejo-organization: 'my-org'
+          forgejo-owner: 'my-org'      # Organization name
           forgejo-repository: 'my-project'
           forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
           release-tag: ${{ github.ref_name }}
@@ -65,12 +35,43 @@ jobs:
           echo "Release URL: ${{ steps.release.outputs.url }}"
 ```
 
+### Example with User Repository
+
+```yaml
+name: Get User Release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to fetch'
+        required: true
+
+jobs:
+  fetch-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Release Notes
+        id: release
+        uses: aloxlamm/forgejo-release-notes@v1
+        with:
+          forgejo-url: 'https://git.example.com'
+          forgejo-owner: 'john-doe'    # Username (not organization)
+          forgejo-repository: 'awesome-project'
+          forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
+          release-tag: ${{ github.event.inputs.tag }}
+      
+      - name: Display Release Info
+        run: |
+          echo "Release: ${{ steps.release.outputs.title }}"
+          echo "Author: ${{ steps.release.outputs.author }}"
+```
+
 ## Inputs
 
 | Input | Description | Required | Default |
 |-------|-------------|----------|---------|
 | `forgejo-url` | The URL of the Forgejo instance | No | `https://git.dmz.thomassauter.com` |
-| `forgejo-organization` | The organization in Forgejo where the repository is located | No | `thstr` |
+| `forgejo-owner` | The owner (organization or username) that owns the repository | No | `thstr` |
 | `forgejo-repository` | The repository in Forgejo where the application is located | **Yes** | - |
 | `forgejo-token` | A personal access token for authenticating with the Forgejo API | **Yes** | - |
 | `release-tag` | The tag or release for which to fetch the release notes | **Yes** | - |

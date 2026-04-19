@@ -4,7 +4,7 @@ async function run() {
   try {
     // Get inputs
     const forgejoUrl = core.getInput("forgejo-url");
-    const organization = core.getInput("forgejo-organization");
+    const owner = core.getInput("forgejo-owner");
     const repository = core.getInput("forgejo-repository");
     const releaseTag = core.getInput("release-tag");
     const forgejoToken = core.getInput("forgejo-token");
@@ -13,11 +13,11 @@ async function run() {
     core.info(`Fetching release notes`);
     core.info(`Tag: ${releaseTag}`);
     core.info(`URL: ${forgejoUrl}`);
-    core.info(`Organization: ${organization}`);
+    core.info(`Owner: ${owner}`);
     core.info(`Repository: ${repository}`);
 
     // Construct API URL
-    const apiUrl = `${forgejoUrl}/api/v1/repos/${organization}/${repository}/releases/tags/${releaseTag}`;
+    const apiUrl = `${forgejoUrl}/api/v1/repos/${owner}/${repository}/releases/tags/${releaseTag}`;
 
     // Fetch release data
     const response = await fetch(apiUrl, {

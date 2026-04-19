@@ -3,9 +3,9 @@ description: "Fetch release notes for a specified tag/release of a forgejo appli
 inputs:
   forgejo-url:
     description: "The URL of the Forgejo instance"
-    default: "https://git.dmz.thomassauter.com"
-  forgejo-organization:
-    description: "The organization in Forgejo where the repository is located"
+    required: true
+  forgejo-owner:
+    description: "The owner (organization or username) that owns the repository"
     default: "thstr"
   forgejo-repository:
     description: "The repository in Forgejo where the application is located"

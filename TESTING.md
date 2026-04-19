@@ -14,7 +14,7 @@ npm run test:local
 
 ```bash
 export INPUT_FORGEJO_URL="https://git.dmz.thomassauter.com"
-export INPUT_FORGEJO_ORGANIZATION="thstr"
+export INPUT_FORGEJO_OWNER="thstr"
 export INPUT_FORGEJO_REPOSITORY="your-repo"
 export INPUT_RELEASE_TAG="v1.0.0"
 export INPUT_FORGEJO_TOKEN="your-token"

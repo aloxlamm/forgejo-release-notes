@@ -6,7 +6,7 @@ const fs = require("fs");
 // Map clean env vars to GitHub Actions INPUT_ format
 // Note: GitHub Actions converts input names: forgejo-url -> INPUT_FORGEJO_URL
 process.env["INPUT_FORGEJO-URL"] = process.env.FORGEJO_URL;
-process.env["INPUT_FORGEJO-ORGANIZATION"] = process.env.FORGEJO_ORGANIZATION;
+process.env["INPUT_FORGEJO-OWNER"] = process.env.FORGEJO_OWNER;
 process.env["INPUT_FORGEJO-REPOSITORY"] = process.env.FORGEJO_REPOSITORY;
 process.env["INPUT_FORGEJO-TOKEN"] = process.env.FORGEJO_TOKEN;
 process.env["INPUT_RELEASE-TAG"] = process.env.RELEASE_TAG;
@@ -14,20 +14,14 @@ process.env["INPUT_RELEASE-TAG"] = process.env.RELEASE_TAG;
 console.log("🧪 Testing Get Release Notes Action...");
 console.log("Environment variables set:");
 console.log("- FORGEJO_URL:", process.env.FORGEJO_URL);
-console.log("- ORGANIZATION:", process.env.FORGEJO_ORGANIZATION);
+console.log("- OWNER:", process.env.FORGEJO_OWNER);
 console.log("- REPOSITORY:", process.env.FORGEJO_REPOSITORY);
 console.log("- TAG:", process.env.RELEASE_TAG);
 console.log("\nChecking INPUT_ vars:");
-console.log("- INPUT_FORGEJO_URL:", process.env.INPUT_FORGEJO_URL);
-console.log(
-  "- INPUT_FORGEJO_ORGANIZATION:",
-  process.env.INPUT_FORGEJO_ORGANIZATION,
-);
-console.log(
-  "- INPUT_FORGEJO_REPOSITORY:",
-  process.env.INPUT_FORGEJO_REPOSITORY,
-);
-console.log("- INPUT_RELEASE_TAG:", process.env.INPUT_RELEASE_TAG);
+console.log("- INPUT_FORGEJO_URL:", process.env["INPUT_FORGEJO-URL"]);
+console.log("- INPUT_FORGEJO_OWNER:", process.env["INPUT_FORGEJO-OWNER"]);
+console.log("- INPUT_FORGEJO_REPOSITORY:", process.env["INPUT_FORGEJO-REPOSITORY"]);
+console.log("- INPUT_RELEASE_TAG:", process.env["INPUT_RELEASE-TAG"]);
 
 try {
   // Run the action

@@ -20,7 +20,7 @@ jobs:
         id: test-action
         with:
           forgejo-url: "https://git.dmz.thomassauter.com"
-          forgejo-organization: "thstr"
+          forgejo-owner: "thstr"
           forgejo-repository: "ponyhof-fe"
           release-tag: "v2.0.5"
           forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
