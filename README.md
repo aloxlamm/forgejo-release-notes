@@ -4,7 +4,7 @@ A GitHub Action that fetches comprehensive release information from a Forgejo gi
 
 ## Usage
 
-### Example with Organization Repository
+### Example
 
 ```yaml
 name: Deploy Release
