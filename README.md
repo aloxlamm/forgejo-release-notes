@@ -69,7 +69,7 @@ jobs:
           echo '${{ steps.test-action.outputs.json }}'
 
 ```
-> NOTE: when runnign the action on forgejo you need to use the full qualified url for the action: `https://github.com/aloxlamm/forgejo-release-notes@v1
+> **NOTE**: when runnign the action on forgejo you need to use the full qualified url for the action: `https://github.com/aloxlamm/forgejo-release-notes@v1
 
 ## Inputs
 
