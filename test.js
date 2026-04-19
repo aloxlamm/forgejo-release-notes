@@ -20,7 +20,10 @@ console.log("- TAG:", process.env.RELEASE_TAG);
 console.log("\nChecking INPUT_ vars:");
 console.log("- INPUT_FORGEJO_URL:", process.env["INPUT_FORGEJO-URL"]);
 console.log("- INPUT_FORGEJO_OWNER:", process.env["INPUT_FORGEJO-OWNER"]);
-console.log("- INPUT_FORGEJO_REPOSITORY:", process.env["INPUT_FORGEJO-REPOSITORY"]);
+console.log(
+  "- INPUT_FORGEJO_REPOSITORY:",
+  process.env["INPUT_FORGEJO-REPOSITORY"],
+);
 console.log("- INPUT_RELEASE_TAG:", process.env["INPUT_RELEASE-TAG"]);
 
 try {
@@ -28,9 +31,9 @@ try {
   console.log("\n🚀 Running action...");
   require("./index.js");
 
-  console.log("\n✅ Action completed successfully!");
+  console.log("\n✅ [TEST] Action completed successfully!");
 } catch (error) {
-  console.error("❌ Test failed:", error.message);
+  console.error("❌ [TEST] Test failed:", error.message);
   process.exit(1);
 }
 

@@ -27594,10 +27594,16 @@ async function run() {
       );
     }
 
-    // Parse JSON response
+    // Test JSON response
+    try {
+      await response.clone().json();
+    } catch (jsonError) {
+      const textResponse = await response.text();
+      throw new Error(
+        `Failed to parse JSON response. Response text: ${textResponse}. Original error: ${jsonError.message}`,
+      );
+    }
     const release = await response.json();
-
-    core.info(`Response JSON: ${JSON.stringify(release)}`);
 
     // Extract and set outputs
     const body = release.body || "";
@@ -27652,34 +27658,40 @@ async function run() {
     core.setOutput("zip_download_count", zipDownloadCount.toString());
     core.setOutput("tarball_download_count", tarballDownloadCount.toString());
 
-    core.info(`✅ Successfully fetched release notes for '${title}'`);
-    // Log extracted values for testing
-    core.info("\n📋 Extracted Values:");
-    core.info(`  ID: ${id}`);
-    core.info(`  Tag Name: ${tagName}`);
-    core.info(`  Title: ${title}`);
-    core.info(`  Target: ${targetCommitish}`);
-    core.info(`  Author: ${author} (ID: ${authorId})`);
-    core.info(`  Author Email: ${authorEmail}`);
-    core.info(`  Author Full Name: ${authorFullName}`);
-    core.info(`  Author Avatar: ${authorAvatarUrl}`);
-    core.info(`  Author Profile: ${authorHtmlUrl}`);
-    core.info(`  Created: ${createdAt}`);
-    core.info(`  Published: ${publishedAt}`);
-    core.info(`  Draft: ${draft}`);
-    core.info(`  Prerelease: ${prerelease}`);
-    core.info(`  Hide Archive Links: ${hideArchiveLinks}`);
-    core.info(`  Assets Count: ${assetsCount}`);
+    // Create collapsible section for detailed output
+    core.startGroup("Response JSON");
+    core.info(JSON.stringify(release));
+    core.endGroup();
+
+    core.startGroup("Parsed values");
+    core.info(`ID: ${id}`);
+    core.info(`Tag Name: ${tagName}`);
+    core.info(`Title: ${title}`);
+    core.info(`Target: ${targetCommitish}`);
+    core.info(`Author: ${author} (ID: ${authorId})`);
+    core.info(`Author Email: ${authorEmail}`);
+    core.info(`Author Full Name: ${authorFullName}`);
+    core.info(`Author Avatar: ${authorAvatarUrl}`);
+    core.info(`Author Profile: ${authorHtmlUrl}`);
+    core.info(`Created: ${createdAt}`);
+    core.info(`Published: ${publishedAt}`);
+    core.info(`Draft: ${draft}`);
+    core.info(`Prerelease: ${prerelease}`);
+    core.info(`Hide Archive Links: ${hideArchiveLinks}`);
+    core.info(`Assets Count: ${assetsCount}`);
     core.info(
-      `  Downloads - Zip: ${zipDownloadCount}, Tarball: ${tarballDownloadCount}`,
+      `Downloads - Zip: ${zipDownloadCount}, Tarball: ${tarballDownloadCount}`,
     );
-    core.info(`  URL: ${url}`);
-    core.info(`  API URL: ${releaseApiUrl}`);
-    core.info(`  Upload URL: ${uploadUrl}`);
-    core.info(`  Tarball: ${tarballUrl}`);
-    core.info(`  Zipball: ${zipballUrl}`);
-    core.info(`  Body:`);
+    core.info(`URL: ${url}`);
+    core.info(`API URL: ${releaseApiUrl}`);
+    core.info(`Upload URL: ${uploadUrl}`);
+    core.info(`Tarball: ${tarballUrl}`);
+    core.info(`Zipball: ${zipballUrl}`);
+    core.info(`Body:`);
     core.info(body.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n"));
+    core.endGroup();
+
+    core.info(`✅ Successfully fetched release notes for '${title}'`);
   } catch (error) {
     core.setFailed(` ❌ Failed to fetch release notes:\n${error.message}`);
   }
