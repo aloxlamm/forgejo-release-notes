@@ -136,6 +136,56 @@ jobs:
 - Personal access token with repository read permissions
 - Valid repository and tag/release
 
+## Local Development
+
+### Testing Locally
+
+For local testing and development, you can create a `.env` file with your configuration:
+
+```bash
+# Create a new .env file
+touch .env
+```
+
+Then populate the `.env` file with your environment variables:
+
+```bash
+# Add your configuration to .env
+cat > .env << 'EOF'
+FORGEJO_URL="https://git.your-repo.com"
+FORGEJO_OWNER="my-org"
+FORGEJO_REPOSITORY="my-repo"
+RELEASE_TAG="v1.0.0"
+FORGEJO_TOKEN="your-token"
+GITHUB_OUTPUT="./output.txt"
+EOF
+```
+
+To test the action locally:
+
+```bash
+# Load environment variables
+source .env
+
+# Run the action
+node index.js
+
+# Check the output
+cat output.txt
+```
+
+### Quick Test Commands
+
+```bash
+# Quick test with npm
+npm test
+
+# Custom local test
+npm run test:local
+```
+
+> **Note**: Make sure to add `.env` to your `.gitignore` file to avoid committing sensitive tokens.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
