@@ -24,7 +24,7 @@ jobs:
           forgejo-url: "https://git.example.com"
           forgejo-owner: "my-org" # Organization name or user name
           forgejo-repository: "my-project"
-          forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
+          forgejo-token: ${{ secrets.FORGEJO_TOKEN }} # optional for private repositories
           release-tag: ${{ github.ref_name }}
 
       - name: Display Results
@@ -67,6 +67,27 @@ jobs:
           echo ""
           echo "=== Complete JSON Response ==="
           echo '${{ steps.test-action.outputs.json }}'
+```
+
+### For public repositories (no token needed)
+
+```yaml
+- uses: aloxlamm/forgejo-release-notes@v1.0.2
+  with:
+    forgejo-url: "https://git.example.com"
+    forgejo-owner: "public-org"
+    forgejo-repository: "public-repo"
+    release-tag: "v1.0.0"
+    # No token needed!
+```
+
+#### For private repositories (token required)
+
+```yaml
+- uses: aloxlamm/forgejo-release-notes@v1.0.2
+  with:
+    forgejo-token: ${{ secrets.FORGEJO_TOKEN }} # Only when needed
+    # ... other inputs
 ```
 
 > **NOTE**: when runnign the action on forgejo you need to use the full qualified url for the action:
