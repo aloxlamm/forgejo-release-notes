@@ -68,5 +68,5 @@ outputs:
   tarball_download_count:
     description: "Number of tarball archive downloads"
 runs:
-  using: "node22"
+  using: "node24"
   main: "index.js"
