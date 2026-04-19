@@ -69,6 +69,7 @@ jobs:
           echo '${{ steps.test-action.outputs.json }}'
 
 ```
+> NOTE: when runnign the action on forgejo you need to use the full qualified url for the action: `https://github.com/aloxlamm/forgejo-release-notes@v1
 
 ## Inputs
 
@@ -84,8 +85,8 @@ jobs:
 
 1. Go to your Forgejo instance
 2. Navigate to Settings → Applications → Generate New Token
-3. Create a token with `repo` permissions
-4. Add it as a secret in your GitHub repository: `FORGEJO_TOKEN`
+3. Create a token with `repo` read permissions
+4. Add it as a secret in your GitHub/Forgejo repository: `FORGEJO_TOKEN`
 
 ## Outputs
 
