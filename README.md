@@ -156,9 +156,9 @@ Then populate the `.env` file with your environment variables:
 ```bash
 # Add your configuration to .env
 cat > .env << 'EOF'
-FORGEJO_URL="https://git.your-repo.com"
-FORGEJO_OWNER="my-org"
-FORGEJO_REPOSITORY="my-repo"
+FORGEJO_URL="https://git.your-forgejo-repo.com"
+FORGEJO_OWNER="your-org"
+FORGEJO_REPOSITORY="your-repo"
 RELEASE_TAG="v1.0.0"
 FORGEJO_TOKEN="your-token"
 GITHUB_OUTPUT="./output.txt"
@@ -176,8 +176,8 @@ npm test
 ### 2. **Manual Environment Test**
 
 ```bash
-export INPUT_FORGEJO_URL="https://git.dmz.thomassauter.com"
-export INPUT_FORGEJO_OWNER="thstr"
+export INPUT_FORGEJO_URL="https://git.your-forgejo-repo.com"
+export INPUT_FORGEJO_OWNER="your-org"
 export INPUT_FORGEJO_REPOSITORY="your-repo"
 export INPUT_RELEASE_TAG="v1.0.0"
 export INPUT_FORGEJO_TOKEN="your-token"
