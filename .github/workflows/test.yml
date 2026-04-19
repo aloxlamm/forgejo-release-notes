@@ -2,9 +2,9 @@ name: Test Get Release Notes Action
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -16,13 +16,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Test Get Release Notes
-        uses: ./get-release-notes # Path to your action
+        uses: . # Path to your action
         id: test-action
         with:
           forgejo-url: "https://git.dmz.thomassauter.com"
           forgejo-organization: "thstr"
-          forgejo-repository: "your-test-repo"
-          release-tag: "v1.0.0"
+          forgejo-repository: "ponyhof-fe"
+          release-tag: "v2.0.5"
           forgejo-token: ${{ secrets.FORGEJO_TOKEN }}
 
       - name: Display Results
