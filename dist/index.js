@@ -27559,24 +27559,36 @@ const core = __nccwpck_require__(7484);
 
 async function run() {
   try {
-    // Get inputs
     const forgejoUrl = core.getInput("forgejo-url");
     const owner = core.getInput("forgejo-owner");
     const repository = core.getInput("forgejo-repository");
     const releaseTag = core.getInput("release-tag");
     const forgejoToken = core.getInput("forgejo-token");
 
-    // Log the request details
     core.info(`Fetching release notes`);
-    core.info(`Tag: ${releaseTag}`);
-    core.info(`URL: ${forgejoUrl}`);
-    core.info(`Owner: ${owner}`);
-    core.info(`Repository: ${repository}`);
+    core.info(`Tag: ${releaseTag && releaseTag.length > 0 ? releaseTag : "N/A"}`);
+    core.info(`URL: ${forgejoUrl && forgejoUrl.length > 0 ? forgejoUrl : "N/A"}`);
+    core.info(`Owner: ${owner && owner.length > 0 ? owner : "N/A"}`);
+    core.info(`Repository: ${repository && repository.length > 0 ? repository : "N/A"}`);
 
-    // Construct API URL
+    if (!forgejoUrl) {
+      throw new Error("Input 'forgejo-url' is required");
+    }
+    if (!owner) {
+      throw new Error("Input 'forgejo-owner' is required");
+    }
+    if (!repository) {
+      throw new Error("Input 'forgejo-repository' is required");
+    }
+    if (!releaseTag) {
+      throw new Error("Input 'release-tag' is required");
+    }
+    if (!forgejoToken) {
+      throw new Error("Input 'forgejo-token' is required");
+    }
+
     const apiUrl = `${forgejoUrl}/api/v1/repos/${owner}/${repository}/releases/tags/${releaseTag}`;
 
-    // Fetch release data
     const response = await fetch(apiUrl, {
       method: "GET",
       headers: {
@@ -27586,7 +27598,6 @@ async function run() {
       },
     });
 
-    // Check if request was successful
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
@@ -27594,7 +27605,6 @@ async function run() {
       );
     }
 
-    // Test JSON response
     try {
       await response.clone().json();
     } catch (jsonError) {
@@ -27605,7 +27615,6 @@ async function run() {
     }
     const release = await response.json();
 
-    // Extract and set outputs
     const body = release.body || "";
     const title = release.name || "";
     const url = release.html_url || "";
@@ -27661,7 +27670,7 @@ async function run() {
     core.info(
       `✅ Successfully fetched and parsed release notes for '${title}'`,
     );
-    // Create collapsible section for detailed output
+
     core.startGroup("Response JSON");
     core.info(JSON.stringify(release));
     core.endGroup();
